@@ -9,7 +9,8 @@ import java.io.Serializable;
  * @author noodle
  */
 public class RegisterVo implements Serializable {
-
+    private static final long serialVersionUID = 8407213871492777924L;
+    
     @NotNull
     private Long phone;
     @NotNull

@@ -10,7 +10,8 @@ import java.io.Serializable;
  * @author noodle
  */
 public class UserInfoVo implements Serializable {
-
+    private static final long serialVersionUID = 1065269475463485040L;
+    
     private Integer uuid;
     private String username;
     private String nickname;

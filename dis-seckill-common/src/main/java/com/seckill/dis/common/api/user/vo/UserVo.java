@@ -11,7 +11,8 @@ import java.util.Date;
  * @author noodle
  */
 public class UserVo implements Serializable {
-
+    private static final long serialVersionUID = 2089295245751616741L;
+    
     private Long uuid;
     private Long phone;
     private String nickname;
@@ -21,21 +22,6 @@ public class UserVo implements Serializable {
     private Date registerDate;
     private Date lastLoginDate;
     private Integer loginCount;
-
-    @Override
-    public String toString() {
-        return "UserVo{" +
-                "uuid=" + uuid +
-                ", phone=" + phone +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", head='" + head + '\'' +
-                ", registerDate=" + registerDate +
-                ", lastLoginDate=" + lastLoginDate +
-                ", loginCount=" + loginCount +
-                '}';
-    }
 
     public Long getUuid() {
         return uuid;
@@ -107,5 +93,20 @@ public class UserVo implements Serializable {
 
     public void setLoginCount(Integer loginCount) {
         this.loginCount = loginCount;
+    }
+    
+    @Override
+    public String toString() {
+        return "UserVo{" +
+                "uuid=" + uuid +
+                ", phone=" + phone +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", head='" + head + '\'' +
+                ", registerDate=" + registerDate +
+                ", lastLoginDate=" + lastLoginDate +
+                ", loginCount=" + loginCount +
+                '}';
     }
 }

@@ -12,8 +12,9 @@ import java.io.Serializable;
  *
  * @author noodle
  */
-public class LoginVo implements Serializable{
-
+public class LoginVo implements Serializable {
+    private static final long serialVersionUID = -5540766408720768839L;
+    
     /**
      * 通过注解的方式校验手机号（JSR303）
      */

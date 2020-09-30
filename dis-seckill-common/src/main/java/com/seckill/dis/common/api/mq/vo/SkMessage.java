@@ -10,8 +10,9 @@ import java.io.Serializable;
  *
  * @author noodle
  */
-public class SkMessage implements Serializable{
-
+public class SkMessage implements Serializable {
+    private static final long serialVersionUID = -2468666394630938631L;
+    
     private UserVo user;
 
     private long goodsId;

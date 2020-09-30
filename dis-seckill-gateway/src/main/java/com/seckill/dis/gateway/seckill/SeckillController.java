@@ -77,8 +77,8 @@ public class SeckillController implements InitializingBean {
      * @param verifyCode 验证码
      * @return 被隐藏的秒杀接口路径
      */
-    @AccessLimit(seconds = 5, maxAccessCount = 5, needLogin = true)
-    @RequestMapping(value = "path", method = RequestMethod.GET)
+    @AccessLimit(seconds = 5, maxAccessCount = 5)
+    @GetMapping(value = "path")
     @ResponseBody
     public Result<String> getSeckillPath(Model model, UserVo user,
                                          @RequestParam("goodsId") long goodsId,
@@ -125,7 +125,7 @@ public class SeckillController implements InitializingBean {
      * @return 订单详情或错误码
      */
     // {path}为客户端回传的path，最初也是有服务端产生的
-    @RequestMapping(value = "{path}/doSeckill", method = RequestMethod.POST)
+    @PostMapping(value = "{path}/doSeckill")
     @ResponseBody
     public Result<Integer> doSeckill(Model model, UserVo user,
                                      @RequestParam("goodsId") long goodsId,
@@ -183,7 +183,7 @@ public class SeckillController implements InitializingBean {
      * @param goodsId
      * @return orderId：成功, -1：秒杀失败, 0： 排队中
      */
-    @RequestMapping(value = "result", method = RequestMethod.GET)
+    @GetMapping(value = "result")
     @ResponseBody
     public Result<Long> getSeckillResult(Model model,
                                          UserVo user,
@@ -204,7 +204,7 @@ public class SeckillController implements InitializingBean {
      * @param goodsId
      * @return
      */
-    @RequestMapping(value = "verifyCode", method = RequestMethod.GET)
+    @GetMapping(value = "verifyCode")
     @ResponseBody
     public Result<String> getVerifyCode(HttpServletResponse response, UserVo user,
                                         @RequestParam("goodsId") long goodsId) {

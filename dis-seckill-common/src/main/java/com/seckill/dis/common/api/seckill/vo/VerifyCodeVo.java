@@ -9,6 +9,8 @@ import java.io.Serializable;
  * @author noodle
  */
 public class VerifyCodeVo implements Serializable {
+    private static final long serialVersionUID = 2932583260654037317L;
+    
     /**
      * 验证码图片
      */

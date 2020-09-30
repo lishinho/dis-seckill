@@ -26,7 +26,7 @@ import java.util.Date;
 @Service(interfaceClass = UserServiceApi.class)
 public class UserServiceImpl implements UserServiceApi {
 
-    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private SeckillUserMapper userMapper;
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserServiceApi {
         boolean lock = dLock.lock(lockKey, uniqueValue, 60 * 1000);
         if (!lock)
             return CodeMsg.WAIT_REGISTER_DONE;
-        logger.debug("注册接口加锁成功");
+        LOG.debug("注册接口加锁成功");
 
         // 检查用户是否注册
         SeckillUser user = this.getSeckillUserByPhone(userModel.getPhone());
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserServiceApi {
         boolean unlock = dLock.unlock(lockKey, uniqueValue);
         if (!unlock)
             return CodeMsg.REGISTER_FAIL;
-        logger.debug("注册接口解锁成功");
+        LOG.debug("注册接口解锁成功");
 
         // 用户注册成功
         if (id > 0)
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserServiceApi {
      */
     @Override
     public String login(@Valid LoginVo loginVo) {
-        logger.info(loginVo.toString());
+        LOG.info(loginVo.toString());
 
         // 获取用户提交的手机号码和密码
         String mobile = loginVo.getMobile();
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserServiceApi {
         // 缓存中、数据库中都不存在该用户信息，直接返回
         if (user == null)
             throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
-        logger.info("用户：" + user.toString());
+        LOG.info("用户：" + user.toString());
 
         // 判断手机号对应的密码是否一致
         String dbPassword = user.getPassword();

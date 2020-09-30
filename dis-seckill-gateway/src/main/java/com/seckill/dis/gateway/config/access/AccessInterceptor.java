@@ -81,9 +81,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
                     return false;
                 }
                 key += "_" + user.getPhone();
-            } else {
-                //do nothing
             }
+    
             // 设置缓存过期时间
             AccessKeyPrefix accessKeyPrefix = AccessKeyPrefix.withExpire(seconds);
             // 在redis中存储的访问次数的key为请求的URI

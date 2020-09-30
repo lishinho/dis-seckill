@@ -11,22 +11,13 @@ import java.io.Serializable;
  * @author noodle
  */
 public class GoodsDetailVo implements Serializable {
-
-
+    // serialVersionUID is used to control downward compatibility
+    private static final long serialVersionUID = -2464605470239668534L;
+    
     private int seckillStatus = 0;
     private int remainSeconds = 0;
     private GoodsVo goods;
     private UserVo user;
-
-    @Override
-    public String toString() {
-        return "GoodsDetailVo{" +
-                "seckillStatus=" + seckillStatus +
-                ", remainSeconds=" + remainSeconds +
-                ", goods=" + goods +
-                ", user=" + user +
-                '}';
-    }
 
     public int getSeckillStatus() {
         return seckillStatus;
@@ -58,5 +49,15 @@ public class GoodsDetailVo implements Serializable {
 
     public void setUser(UserVo user) {
         this.user = user;
+    }
+    
+    @Override
+    public String toString() {
+        return "GoodsDetailVo{" +
+                "seckillStatus=" + seckillStatus +
+                ", remainSeconds=" + remainSeconds +
+                ", goods=" + goods +
+                ", user=" + user +
+                '}';
     }
 }

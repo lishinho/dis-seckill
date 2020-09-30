@@ -10,11 +10,10 @@ public class RedisConfig {
 
     private String host;
     private int port;
-    private int timeout;//秒
-    //    private String password;
+    private int timeoutInSecond;
     private int poolMaxTotal;
     private int poolMaxIdle;
-    private int poolMaxWait;//秒
+    private int poolMaxWaitInSecond;
 
 
     public String getHost() {
@@ -33,12 +32,12 @@ public class RedisConfig {
         this.port = port;
     }
 
-    public int getTimeout() {
-        return timeout;
+    public int getTimeoutInSecond() {
+        return timeoutInSecond;
     }
 
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
+    public void setTimeoutInSecond(int timeoutInSecond) {
+        this.timeoutInSecond = timeoutInSecond;
     }
 
     public int getPoolMaxTotal() {
@@ -57,11 +56,11 @@ public class RedisConfig {
         this.poolMaxIdle = poolMaxIdle;
     }
 
-    public int getPoolMaxWait() {
-        return poolMaxWait;
+    public int getPoolMaxWaitInSecond() {
+        return poolMaxWaitInSecond;
     }
 
-    public void setPoolMaxWait(int poolMaxWait) {
-        this.poolMaxWait = poolMaxWait;
+    public void setPoolMaxWaitInSecond(int poolMaxWaitInSecond) {
+        this.poolMaxWaitInSecond = poolMaxWaitInSecond;
     }
 }

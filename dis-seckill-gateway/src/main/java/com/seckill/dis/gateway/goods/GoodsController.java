@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/goods/")
 public class GoodsController {
 
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Reference(interfaceClass = RedisServiceApi.class)
     RedisServiceApi redisService;

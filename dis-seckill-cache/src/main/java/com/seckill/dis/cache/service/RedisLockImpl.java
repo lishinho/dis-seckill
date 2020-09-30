@@ -63,23 +63,18 @@ public class RedisLockImpl implements DLockApi {
      * @return
      */
     public boolean unlock(String lockKey, String uniqueValue) {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
+        try (Jedis jedis = jedisPool.getResource()) {
             // 使用Lua脚本保证操作的原子性
             String script = "if redis.call('get', KEYS[1]) == ARGV[1] then " +
                     "return redis.call('del', KEYS[1]) " +
                     "else return 0 " +
                     "end";
             Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(uniqueValue));
-
+        
             if (RELEASE_SUCCESS.equals(result)) {
                 return true;
             }
             return false;
-        } finally {
-            if (jedis != null)
-                jedis.close();
         }
     }
 }

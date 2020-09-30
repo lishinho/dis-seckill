@@ -188,7 +188,6 @@ public class SeckillServiceImpl implements SeckillServiceApi {
         int num3 = rdm.nextInt(10);
         char op1 = ops[rdm.nextInt(3)];
         char op2 = ops[rdm.nextInt(3)];
-        String exp = "" + num1 + op1 + num2 + op2 + num3;
-        return exp;
+        return "" + num1 + op1 + num2 + op2 + num3;
     }
 }

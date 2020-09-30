@@ -21,7 +21,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private static Logger logger = LoggerFactory.getLogger(WebConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
     @Autowired
     UserArgumentResolver userArgumentResolver;

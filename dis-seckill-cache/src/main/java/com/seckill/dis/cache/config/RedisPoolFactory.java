@@ -3,7 +3,6 @@ package com.seckill.dis.cache.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -22,9 +21,9 @@ public class RedisPoolFactory {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxIdle(redisConfig.getPoolMaxIdle());
         poolConfig.setMaxTotal(redisConfig.getPoolMaxTotal());
-        poolConfig.setMaxWaitMillis(redisConfig.getPoolMaxWait() * 1000);
+        poolConfig.setMaxWaitMillis(redisConfig.getPoolMaxWaitInSecond() * 1000);
 
-        JedisPool pool = new JedisPool(poolConfig, redisConfig.getHost(), redisConfig.getPort(), redisConfig.getTimeout());
+        JedisPool pool = new JedisPool(poolConfig, redisConfig.getHost(), redisConfig.getPort(), redisConfig.getTimeoutInSecond());
         return pool;
     }
 }

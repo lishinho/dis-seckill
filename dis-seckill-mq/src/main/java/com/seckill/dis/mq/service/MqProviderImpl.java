@@ -22,7 +22,7 @@ import java.util.UUID;
 @Service(interfaceClass = MqProviderApi.class)
 public class MqProviderImpl implements MqProviderApi, RabbitTemplate.ConfirmCallback {
 
-    private static Logger logger = LoggerFactory.getLogger(MqProviderImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MqProviderImpl.class);
 
     private RabbitTemplate rabbitTemplate;
 
@@ -36,6 +36,7 @@ public class MqProviderImpl implements MqProviderApi, RabbitTemplate.ConfirmCall
     @Override
     public void sendSkMessage(SkMessage message) {
         logger.info("MQ send message: " + message);
+        
         // 秒杀消息关联的数据
         CorrelationData skCorrData = new CorrelationData(UUID.randomUUID().toString());
         // 第一个参数为消息队列名(此处也为routingKey)，第二个参数为发送的消息
@@ -48,7 +49,7 @@ public class MqProviderImpl implements MqProviderApi, RabbitTemplate.ConfirmCall
      */
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        logger.info("SkMessage UUID: " + correlationData.getId());
+        logger.info("SkMessage UUID: {}", correlationData.getId());
         if (ack) {
             logger.info("SkMessage 消息消费成功！");
         } else {
@@ -56,7 +57,7 @@ public class MqProviderImpl implements MqProviderApi, RabbitTemplate.ConfirmCall
         }
 
         if (cause != null) {
-            logger.info("CallBackConfirm Cause: " + cause);
+            logger.info("CallBackConfirm Cause: {}", cause);
         }
     }
 }

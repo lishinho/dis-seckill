@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private static Logger logger = LoggerFactory.getLogger(UserArgumentResolver.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserArgumentResolver.class);
 
     /**
      * 由于需要将一个cookie对应的用户存入第三方缓存中，这里用redis，所以需要引入redis service
@@ -69,7 +69,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         // 获取请求和响应对象
         HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = nativeWebRequest.getNativeResponse(HttpServletResponse.class);
-        logger.info(request.getRequestURL() + " resolveArgument");
+        logger.info("ResolveArgument: the request url is {}", request.getRequestURL());
 
         // 从请求对象中获取token（token可能有两种方式从客户端返回，1：通过url的参数，2：通过set-Cookie字段）
         String paramToken = request.getParameter(UserServiceApi.COOKIE_NAME_TOKEN);

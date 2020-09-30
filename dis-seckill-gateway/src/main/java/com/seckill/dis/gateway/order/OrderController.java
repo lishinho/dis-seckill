@@ -11,6 +11,7 @@ import com.seckill.dis.common.result.Result;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,10 +39,9 @@ public class OrderController {
      * @param orderId
      * @return
      */
-    @RequestMapping("detail")
+    @GetMapping("detail")
     @ResponseBody
-    public Result<OrderDetailVo> orderInfo(Model model,
-                                           UserVo user,
+    public Result<OrderDetailVo> orderInfo(Model model, UserVo user,
                                            @RequestParam("orderId") long orderId) {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);

@@ -24,7 +24,7 @@ import java.util.List;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-    private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * 异常处理
@@ -35,14 +35,13 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)// 这个注解用指定这个方法对何种异常处理（这里默认所有异常都用这个方法处理）
     public Result<String> exceptionHandler(HttpServletRequest request, Exception e) {
-        logger.info("出现异常");
+        LOG.info("出现异常");
         e.printStackTrace();// 打印原始的异常信息，方便调试
 
         // 如果所拦截的异常是自定义的全局异常，这按自定义异常的处理方式处理，否则按默认方式处理
         if (e instanceof GlobalException) {
-            logger.debug("common 模块中的异常");
-            GlobalException exception = (GlobalException) e;
-            return Result.error(exception.getCodeMsg());// 向客户端返回异常信息
+            LOG.debug("common 模块中的异常");
+            return Result.error(((GlobalException) e).getCodeMsg());// 向客户端返回异常信息
 
         } else if (e instanceof BindException) {
             BindException bindException = (BindException) e;

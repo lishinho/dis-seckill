@@ -3,6 +3,7 @@ package com.seckill.dis.cache.service;
 import com.alibaba.fastjson.JSON;
 import com.seckill.dis.common.api.cache.RedisServiceApi;
 import com.seckill.dis.common.api.cache.vo.KeyPrefix;
+import com.seckill.dis.common.util.JsonUtil;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
@@ -24,7 +25,7 @@ public class RedisServiceImpl implements RedisServiceApi {
 
     @Override
     public <T> T get(KeyPrefix prefix, String key, Class<T> clazz) {
-        Jedis jedis = null;// redis连接
+        Jedis jedis = null;
 
         try {
             jedis = jedisPool.getResource();
@@ -132,9 +133,9 @@ public class RedisServiceImpl implements RedisServiceApi {
 
         Class<?> clazz = value.getClass();
         /*首先对基本类型处理*/
-        if (clazz == int.class || clazz == Integer.class)
+        if (clazz == Integer.class)
             return "" + value;
-        else if (clazz == long.class || clazz == Long.class)
+        else if (clazz == Long.class)
             return "" + value;
         else if (clazz == String.class)
             return (String) value;
@@ -152,22 +153,8 @@ public class RedisServiceImpl implements RedisServiceApi {
      * @return json字符串对应的对象
      */
     public static <T> T stringToBean(String strValue, Class<T> clazz) {
-
-        if ((strValue == null) || (strValue.length() <= 0) || (clazz == null))
-            return null;
-
-        // int or Integer
-        if ((clazz == int.class) || (clazz == Integer.class))
-            return (T) Integer.valueOf(strValue);
-            // long or Long
-        else if ((clazz == long.class) || (clazz == Long.class))
-            return (T) Long.valueOf(strValue);
-            // String
-        else if (clazz == String.class)
-            return (T) strValue;
-            // 对象类型
-        else
-            return JSON.toJavaObject(JSON.parseObject(strValue), clazz);
+    
+        return JsonUtil.stringToBean(strValue, clazz);
     }
 
     /**

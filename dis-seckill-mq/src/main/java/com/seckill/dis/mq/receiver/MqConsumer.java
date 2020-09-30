@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MqConsumer {
 
-    private static Logger logger = LoggerFactory.getLogger(MqConsumer.class);
+    private static final Logger logger = LoggerFactory.getLogger(MqConsumer.class);
 
     @Reference(interfaceClass = GoodsServiceApi.class)
     GoodsServiceApi goodsService;
@@ -47,7 +47,7 @@ public class MqConsumer {
      */
     @RabbitListener(queues = MQConfig.SECKILL_QUEUE)
     public void receiveSkInfo(SkMessage message) {
-        logger.info("MQ receive a message: " + message);
+        logger.info("MQ receive a message: {}", message);
 
         // 获取秒杀用户信息与商品id
         UserVo user = message.getUser();

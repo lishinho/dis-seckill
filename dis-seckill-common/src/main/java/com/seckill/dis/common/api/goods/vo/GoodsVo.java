@@ -13,7 +13,8 @@ import java.util.Date;
  * @author noodle
  */
 public class GoodsVo extends Goods implements Serializable {
-
+    private static final long serialVersionUID = -1251415582922655403L;
+    
     /*只包含了部分 seckill_goods 表的信息*/
     private Double seckillPrice;
     private Integer stockCount;
